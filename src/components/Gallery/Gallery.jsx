@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios"; // HTTP client for API requests
+import axios from "axios";
+import "./Gallery.css"; // Import CSS file
 
-// Gallery Component
 const Gallery = () => {
-  const [photos, setPhotos] = useState([]); // State to store photos
+  const [photos, setPhotos] = useState([]); // Store fetched photos
   const [page, setPage] = useState(1); // Track current page for API
   const [loading, setLoading] = useState(false); // Track loading state
-  const [error, setError] = useState(null); // State for error handling
+  const [error, setError] = useState(null); // Track errors
 
   // Fetch photos from Unsplash API
   const fetchPhotos = useCallback(async () => {
@@ -14,7 +14,7 @@ const Gallery = () => {
     setError(null); // Reset errors
     try {
       const response = await axios.get("https://api.unsplash.com/photos", {
-        params: { per_page: 10, page }, // Number of photos to fetch, including current page in params
+        params: { per_page: 10, page }, // Include current page in params
         headers: {
           Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`,
         },
@@ -24,13 +24,13 @@ const Gallery = () => {
       setPhotos((prevPhotos) => [...prevPhotos, ...response.data]);
     } catch (err) {
       console.error("Error fetching photos:", err);
-      setError("Failed to fetch photos. Please try again later.");
+      setError("Failed to load photos. Please try again.");
     } finally {
       setLoading(false); // Set loading to false
     }
   }, [page]);
 
-  // UseEffect to fetch data on component mount
+  // Load initial photos on component mount
   useEffect(() => {
     fetchPhotos();
   }, [fetchPhotos]);
@@ -50,23 +50,44 @@ const Gallery = () => {
     return () => window.removeEventListener("scroll", handleScroll); // Cleanup
   }, [handleScroll]);
 
-  // Render photos or error message
   return (
     <div>
-      <h1>Photo Gallery</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      <h1 style={{ textAlign: "center" }}>Photo Gallery</h1>
+
+      {/* Error Message */}
+      {error && (
+        <div style={{ color: "red", textAlign: "center", margin: "20px 0" }}>
+          <p>{error}</p>
+          <button
+            onClick={() => fetchPhotos()}
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#007BFF",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      )}
+
+      <div className="gallery-container" role="region" aria-label="Photo Gallery">
         {photos.map((photo) => (
-          <div key={photo.id} style={{ width: "200px" }}>
+          <div key={photo.id} className="photo-card" tabIndex="0">
             <img
               src={photo.urls.small}
-              alt={photo.alt_description}
-              style={{ width: "100%", borderRadius: "8px" }}
+              alt={photo.alt_description || "Photo from unsplash"}
+              loading="lazy" // Lazy load images for performance
             />
-            <p style={{ textAlign: "center" }}>{photo.user.name}</p>
+            <p>{photo.user.name}</p>
           </div>
         ))}
       </div>
+
+      {/* Loading indicator */}
       {loading && <p style={{ textAlign: "center" }}>Loading...</p>}
     </div>
   );

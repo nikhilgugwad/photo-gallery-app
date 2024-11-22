@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Photo Gallery
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive photo gallery application built using React.js and the Unsplash API. The app implements infinite scrolling, accessibility features, hover effects, and lazy loading for optimal performance.
 
-## Available Scripts
+## **Live Site**
 
-In the project directory, you can run:
+The application is live at: [https://exquisite-kashata-c14515.netlify.app/](https://your-app-name.netlify.app)
 
-### `npm start`
+## **Features**
+- **Photo Gallery Layout**: Display photos in a grid format with photographer details.
+- **Infinite Scroll**: Load more images as the user scrolls down.
+- **Responsive Design**: Adapts to different screen sizes.
+- **Error Handling**: Shows error messages for failed API requests.
+- **Loading Indicator**: Displays a spinner while images are loading.
+- **Hover Effects**: Adds interactivity with zoom and shadow effects on photos.
+- **Accessibility**: Includes alt attributes, ARIA roles, and keyboard navigation.
+- **Performance Optimization**: Lazy-loads images for better performance.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Technologies Used**
+- **React.js**: Frontend framework.
+- **Unsplash API**: For fetching high-quality photos.
+- **CSS**: For styling (without CSS frameworks).
+- **Netlify**: Deployment platform.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## **Getting Started**
 
-### `npm test`
+### **Prerequisites**
+- Node.js and npm installed.
+- An Unsplash API key. Get one by registering at [Unsplash Developers](https://unsplash.com/developers).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### **Steps to Install and Run the Project Locally**
 
-### `npm run build`
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/nikhilgugwad/photo-gallery-app.git
+   cd photo-gallery-app
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2.  **Install dependencies**:
+    
+    ```bash
+    npm install
+    
+    ```
+    
+3.  **Create a `.env` file**: In the project root, create a `.env` file and add your Unsplash API key:
+    
+    ```env
+    REACT_APP_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+    
+    ```
+    
+4.  **Run the application**:
+    
+    ```bash
+    npm start
+    
+    ```
+    
+5.  Open [http://localhost:3000](http://localhost:3000/) in your browser to view the app.
 
-### `npm run eject`
+## **Advanced Features and Optimizations**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **1. Lazy Loading of Images**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   Images are lazy-loaded using the `loading="lazy"` attribute in the `<img>` tag. This ensures that only images visible in the viewport are downloaded, reducing initial load time and improving performance for users on slow connections.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### **2. Hover Effects**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-   Subtle hover effects such as zoom and shadow are implemented for interactivity. These effects are designed using pure CSS for lightweight and fast rendering.
 
-## Learn More
+### **3. Error Handling**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-   Graceful error messages are displayed if the Unsplash API request fails due to network issues or invalid API keys. This ensures a better user experience.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **4. Responsive Design**
 
-### Code Splitting
+-   The gallery adjusts its layout based on screen size using CSS Grid and media queries. The design supports 1-2 columns on small screens and 3-4 columns on larger screens.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### **5. Accessibility**
 
-### Analyzing the Bundle Size
+-   All images include descriptive `alt` attributes for screen readers, and ARIA roles are added for dynamic content to ensure compliance with accessibility standards.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## **Deployment**
 
-### Making a Progressive Web App
+### **Netlify Deployment**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The project is deployed on Netlify. Steps to redeploy:
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1.  Run `npm run build` to generate the production build.
+2.  Drag and drop the `build` folder to the deployment section on Netlify or connect your GitHub repository for continuous deployment.
